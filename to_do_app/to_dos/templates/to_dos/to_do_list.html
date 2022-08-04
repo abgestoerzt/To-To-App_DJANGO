@@ -4,17 +4,25 @@
 <div class="container">
     <h3>Here is a List of all your Todos</h3>
 
-    <ul>
-        {% for to_do in object_list %}
-
-
-
-        <li><a href="{% url 'to-dos:detail' pk=to_do.pk %}">{{to_do.name}}</a></li>
-
-        {% endfor %}
-
-
-    </ul>
+    {% if object_list %}
+	<table class="table table-bordered">
+		{% for to_do in object_list %}
+			{% if to_do.is_done %}
+				<tr class="table-secondary">
+					<td class="striker"><a href="#">{{ to_do.name }}</a></td> 
+					<td><center><a href="#">Uncross</a></center></td>
+					<td><center><a href="{#}">Delete</a></center></td>
+				</tr>
+			{% else %}
+				<tr>
+					<td><a href="#">{{ to_do.name }}</a></td> 
+					<td><center><a href="#">Cross Off</a></center></td>
+					<td><center><a href="#">Delete</a></center></td>
+				</tr>
+			{% endif %}
+		{% endfor %}
+	</table>
+	{% endif %}
 
 
 

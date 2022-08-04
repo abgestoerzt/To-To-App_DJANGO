@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <h3>Here is a List of all your Todos</h3>
+
+    <ul>
+        {% for to_do in object_list %}
+
+
+
+        <li><a href="{% url 'to-dos:detail' pk=to_do.pk %}">{{to_do.name}}</a></li>
+
+        {% endfor %}
+
+
+    </ul>
+
+
+
+</div>
+
+
+
+{% endblock %}
