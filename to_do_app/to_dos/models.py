@@ -6,7 +6,7 @@ from django.db import models
 
 class To_Do(models.Model):
     name = models.CharField(max_length=255)
-    deadline = models.DateTimeField()
+    deadline = models.DateField()
     category = models.CharField(max_length=255)
     is_done = models.BooleanField(default=False)
 

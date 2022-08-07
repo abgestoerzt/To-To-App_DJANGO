@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+{% load static %}
 
 <div class="container">
     <h3>Here is a List of all your Todos</h3>
@@ -9,15 +10,15 @@
 		{% for to_do in object_list %}
 			{% if to_do.is_done %}
 				<tr class="table-secondary">
-					<td class="striker"><a href="#">{{ to_do.name }}</a></td> 
-					<td><center><a href="#">Uncross</a></center></td>
-					<td><center><a href="{#}">Delete</a></center></td>
+					<td class="striker"><a href="{% url 'to-dos:update' pk=to_do.pk %}">{{ to_do.name }}</a></td> 
+					<td><center><a href="{% url 'to-dos:uncross' to_do.id %}">Uncross</a></center></td>
+					<td><center><a href="{% url 'to-dos:delete' pk=to_do.pk %}">Delete</a></center></td>
 				</tr>
 			{% else %}
 				<tr>
-					<td><a href="#">{{ to_do.name }}</a></td> 
-					<td><center><a href="#">Cross Off</a></center></td>
-					<td><center><a href="#">Delete</a></center></td>
+					<td><a href="{% url 'to-dos:update' pk=to_do.pk %}">{{ to_do.name }}</a></td> 
+					<td><center><a href="{% url 'to-dos:cross_off' to_do.id %}">Cross Off</a></center></td>
+					<td><center><a href="{% url 'to-dos:delete' pk=to_do.pk %}">Delete</a></center></td>
 				</tr>
 			{% endif %}
 		{% endfor %}
