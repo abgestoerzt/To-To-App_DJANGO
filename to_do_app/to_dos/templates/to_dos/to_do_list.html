@@ -5,9 +5,9 @@
 <div class="container">
     <h3>Here is a List of all your Todos</h3>
 
-    {% if object_list %}
+    {% if AllToDos %}
 	<table class="table table-bordered">
-		{% for to_do in object_list %}
+		{% for to_do in AllToDos %}
 			{% if to_do.is_done %}
 				<tr class="table-secondary">
 					<td class="striker"><a href="{% url 'to-dos:update' pk=to_do.pk %}">{{ to_do.name }}</a></td> 

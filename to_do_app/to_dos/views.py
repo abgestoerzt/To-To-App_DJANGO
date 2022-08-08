@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, ListView, DetailView, CreateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, DeleteView
 from django.views.generic.edit import UpdateView
+from django.views import View
+from .forms import ToDoForm
 
 from django.urls import reverse_lazy
 
@@ -9,12 +11,14 @@ from .models import To_Do
 # Create your views here.
 
 
-class HomePageView(TemplateView):
-    template_name = "base.html"
-
-
 class ToDoListView(ListView):
+    context_object_name = 'AllToDos'
     model = To_Do
+
+    def get_context_data(self, **kwargs):
+        context = super(ToDoListView, self).get_context_data(**kwargs)
+        context['form'] = ToDoForm()
+        return context
 
 
 class ToDoDetailView(DetailView):
@@ -30,13 +34,13 @@ class ToDoUpdateView(UpdateView):
 
 class ToDoCreateView(CreateView):
     model = To_Do
-    fields = ['name', 'deadline', 'category']
+    fields = ['name']
     success_url = '/'
 
 
 class ToDoDelelteView(DeleteView):
     model = To_Do
-    success_url = reverse_lazy('to-dos:list')
+    success_url = reverse_lazy('to-dos:home')
 
 
 def cross_off(request, to_do_id):
