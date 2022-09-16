@@ -14,6 +14,7 @@ from .models import To_Do
 class ToDoListView(ListView):
     context_object_name = 'AllToDos'
     model = To_Do
+    ordering = ['-created_at']
 
     def get_context_data(self, **kwargs):
         context = super(ToDoListView, self).get_context_data(**kwargs)
@@ -27,7 +28,7 @@ class ToDoDetailView(DetailView):
 
 class ToDoUpdateView(UpdateView):
     model = To_Do
-    fields = ['name', 'deadline', 'category']
+    fields = ['name']
     template_name_suffix = '_update_form'
     success_url = '/'  # this is not so nice, better use reverse or reverse lazy: https://stackoverflow.com/questions/66262282/how-to-redirect-an-updateview-upon-success
 
