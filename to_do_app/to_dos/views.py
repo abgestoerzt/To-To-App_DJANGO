@@ -28,14 +28,14 @@ class ToDoDetailView(DetailView):
 
 class ToDoUpdateView(UpdateView):
     model = To_Do
-    fields = ['name']
+    fields = ['name', "deadline"]
     template_name_suffix = '_update_form'
     success_url = '/'  # this is not so nice, better use reverse or reverse lazy: https://stackoverflow.com/questions/66262282/how-to-redirect-an-updateview-upon-success
 
 
 class ToDoCreateView(CreateView):
     model = To_Do
-    fields = ['name']
+    fields = ['name', "deadline"]
     success_url = '/'
 
 

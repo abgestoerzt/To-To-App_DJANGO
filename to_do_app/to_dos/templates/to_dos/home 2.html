@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<div class="container">
+    <h3>Here is a List of all your Todos</h3>
+
+    {% if all_items %}
+	<table class="table table-bordered">
+		{% for to_do in all_items %}
+			{% if to_do.is_done %}
+				<tr class="table-secondary">
+					<td class="striker"><a href="{% url 'to-dos:update' pk=to_do.pk %}">{{ to_do.name }}</a></td> 
+					<td><center><a href="{% url 'to-dos:uncross' to_do.id %}">Uncross</a></center></td>
+					<td><center><a href="{% url 'to-dos:delete' pk=to_do.pk %}">Delete</a></center></td>
+				</tr>
+			{% else %}
+				<tr>
+					<td><a href="{% url 'to-dos:update' pk=to_do.pk %}">{{ to_do.name }}</a></td> 
+					<td><center><a href="{% url 'to-dos:cross_off' to_do.id %}">Cross Off</a></center></td>
+					<td><center><a href="{% url 'to-dos:delete' pk=to_do.pk %}">Delete</a></center></td>
+				</tr>
+			{% endif %}
+		{% endfor %}
+	</table>
+	{% endif %}
+
+
+
+</div>
+
+
+
+{% endblock %}
